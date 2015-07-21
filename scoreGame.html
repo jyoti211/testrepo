@@ -1,0 +1,28 @@
+<html>
+ <script src="http://localhost:9090/socket.io/socket.io.js"></script>
+ <script>
+ ( function() {
+   var email;
+   var score;
+   var boutonSaveScore;
+ 
+   var envoyerMessage = function() {
+	 var socket = io.connect('http://localhost:9090');
+     socket.emit('saveScore',{'email':email.value,'score':score.value});
+   };
+ 
+   window.addEventListener("load", function() {
+    email = document.getElementById("email");
+    score = document.getElementById("score");
+    boutonSaveScore = document.getElementById("boutonSaveScore");
+    boutonSaveScore.addEventListener("click", envoyerMessage);
+   });
+ })();
+ </script>
+ <body>
+	SAUVEGARDE DE SCORE AVEC NODE.JS ET SOCKET.IO<br>
+	<input type="text" id="email">
+	<input type="text" id="score">
+	<input type="button" id="boutonSaveScore" value="Sauvegarder Score">
+ </body>
+</html>
